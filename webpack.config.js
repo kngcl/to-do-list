@@ -21,13 +21,17 @@ module.exports = {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       hash: true,
       clean: true,
-      title: 'Project',
+      title: 'To-do-List',
       template: './src/index.html',
     }),
     new WebpackManifestPlugin(),

@@ -1,31 +1,36 @@
 import './styles/styles.css';
+import Icon from './icon.png';
 
-const plusBtn = document.querySelector('.plus');
-const minusBtn = document.querySelector('.minus');
-const textContainer = document.querySelector('span');
+const todo = document.querySelector('.todo');
+const btn = document.querySelector('.add');
+const task = document.querySelector('.task-content');
+let tod1;
 
-let data = 0;
+function todoList() {
+  tod1 = todo.value;
+  if (tod1 === '') {
+    alert('Please Enter A Task');
+  } else {
+    const todoItem = document.createElement('div');
+    todoItem.classList.add('displayItem');
+    todoItem.innerHTML = `<div class='task'>
+    <input type='radio' name='radio' value='' class = "hello"> ${tod1}<i class='fa fa-trash icons'></i>
+  </div>`;
+    task.appendChild(todoItem);
+    todoItem.querySelector('.hello').addEventListener('click', () => {
+      todoItem.style.textDecoration = 'line-through';
+    });
+    todoItem.querySelector('.icons').addEventListener('click', () => {
+      todoItem.remove();
+    });
+    const myIcon = new Image();
+    myIcon.src = Icon;
 
-function add() {
-  const value = Math.floor(Math.random() * 1000);
-  data = Math.max(data, value);
-  return value;
+    todoItem.appendChild(myIcon);
+  }
 }
 
-function sub() {
-  const value = Math.floor(Math.random() * 1000);
-  data = Math.min(data, value);
-  return value;
-}
-
-function displayValue(now, text = data) {
-  textContainer.innerHTML = `${text} (${now})`;
-}
-
-plusBtn.addEventListener('click', () => {
-  displayValue(add());
-});
-
-minusBtn.addEventListener('click', () => {
-  displayValue(sub());
-});
+btn.onclick = function displayContent() {
+  todoList();
+  todo.value = '';
+};
